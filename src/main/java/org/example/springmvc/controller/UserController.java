@@ -1,6 +1,7 @@
 package org.example.springmvc.controller;
 
 import org.example.springmvc.bean.User;
+import org.example.springmvc.common.AffectedRowsResult;
 import org.example.springmvc.common.Result;
 import org.example.springmvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +39,13 @@ public class UserController {
 
 
     @RequestMapping(value = "/user", method = RequestMethod.POST, produces = "application/json")
-    public Result<User> addUser(@RequestBody User user) {
-        Result<User> result;
+    public Result<AffectedRowsResult> addUser(@RequestBody User user) {
+        Result<AffectedRowsResult> result;
         int resultNum = userService.addUser(user);
+        AffectedRowsResult affectedRowsResult = new AffectedRowsResult();
+        affectedRowsResult.setAffectedRows(resultNum);
         if (resultNum > 0) {
-            result = Result.success(user);
+            result = Result.success(affectedRowsResult);
         } else {
             result = Result.error("添加失败");
         }
@@ -50,11 +53,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.PUT, produces = "application/json")
-    public Result<User> updateUser(@RequestBody User user) {
-        Result<User> result;
+    public Result<AffectedRowsResult> updateUser(@RequestBody User user) {
+        Result<AffectedRowsResult> result;
         int resultNum = userService.updateUser(user);
+        AffectedRowsResult affectedRowsResult = new AffectedRowsResult();
+        affectedRowsResult.setAffectedRows(resultNum);
         if (resultNum > 0) {
-            result = Result.success(user);
+            result = Result.success(affectedRowsResult);
         } else {
             result = Result.error("更新用户失败");
         }
@@ -62,20 +67,16 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE, produces = "application/json")
-    public Result<User> deleteUser(@PathVariable("id") Long id) {
-        Result<User> result;
+    public Result<AffectedRowsResult> deleteUser(@PathVariable("id") Long id) {
+        Result<AffectedRowsResult> result;
         int resultNum = userService.deleteUser(id);
+        AffectedRowsResult affectedRowsResult = new AffectedRowsResult();
+        affectedRowsResult.setAffectedRows(resultNum);
         if (resultNum > 0) {
-            result = Result.success(null);
+            result = Result.success(affectedRowsResult);
         } else {
             result = Result.error("删除用户失败");
         }
         return result;
-    }
-
-    @ResponseBody
-    @ExceptionHandler(Exception.class)
-    public Result<String> exceptionHandler(Exception e) {
-        return Result.error(500, e.getMessage());
     }
 }
