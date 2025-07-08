@@ -1,8 +1,9 @@
 package org.example.springmvc.controller;
 
+import jakarta.validation.Valid;
 import org.example.springmvc.bean.User;
-import org.example.springmvc.common.AffectedRowsResult;
-import org.example.springmvc.common.Result;
+import org.example.springmvc.VO.AffectedRowsResult;
+import org.example.springmvc.VO.Result;
 import org.example.springmvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +40,7 @@ public class UserController {
 
 
     @RequestMapping(value = "/user", method = RequestMethod.POST, produces = "application/json")
-    public Result<AffectedRowsResult> addUser(@RequestBody User user) {
+    public Result<AffectedRowsResult> addUser(@RequestBody @Valid User user) {
         Result<AffectedRowsResult> result;
         int resultNum = userService.addUser(user);
         AffectedRowsResult affectedRowsResult = new AffectedRowsResult();
@@ -53,7 +54,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.PUT, produces = "application/json")
-    public Result<AffectedRowsResult> updateUser(@RequestBody User user) {
+    public Result<AffectedRowsResult> updateUser(@RequestBody @Valid User user) {
         Result<AffectedRowsResult> result;
         int resultNum = userService.updateUser(user);
         AffectedRowsResult affectedRowsResult = new AffectedRowsResult();

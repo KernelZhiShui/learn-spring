@@ -1,6 +1,8 @@
-package org.example.springmvc.common;
+package org.example.springmvc.VO;
 
 import lombok.Data;
+
+import java.util.Map;
 
 @Data
 public class Result<T> {
@@ -27,6 +29,14 @@ public class Result<T> {
         Result<T> result = new Result<>();
         result.setCode(code);
         result.setMessage(message);
+        return result;
+    }
+
+    public static Result error(int code, String message, Map<String, String> data) {
+        Result result = new Result<>();
+        result.setCode(code);
+        result.setMessage(message);
+        result.setData(data);
         return result;
     }
 

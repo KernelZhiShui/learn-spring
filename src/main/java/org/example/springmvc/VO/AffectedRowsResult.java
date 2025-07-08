@@ -1,4 +1,4 @@
-package org.example.springmvc.common;
+package org.example.springmvc.VO;
 
 import lombok.Data;
 
