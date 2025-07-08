@@ -2,13 +2,16 @@ package org.example.springmvc.controller;
 
 import jakarta.validation.Valid;
 import org.example.springmvc.bean.User;
-import org.example.springmvc.VO.AffectedRowsResult;
-import org.example.springmvc.VO.Result;
+import org.example.springmvc.vo.request.UserAddVo;
+import org.example.springmvc.vo.response.AffectedRowsResult;
+import org.example.springmvc.vo.response.Result;
 import org.example.springmvc.service.UserService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RequestMapping("/api/v1")
@@ -40,8 +43,11 @@ public class UserController {
 
 
     @RequestMapping(value = "/user", method = RequestMethod.POST, produces = "application/json")
-    public Result<AffectedRowsResult> addUser(@RequestBody @Valid User user) {
+    public Result<AffectedRowsResult> addUser(@RequestBody @Valid UserAddVo userAddVo) {
+        System.out.println("UserAddVo"+userAddVo);
         Result<AffectedRowsResult> result;
+        User user = new User();
+        BeanUtils.copyProperties(userAddVo, user);
         int resultNum = userService.addUser(user);
         AffectedRowsResult affectedRowsResult = new AffectedRowsResult();
         affectedRowsResult.setAffectedRows(resultNum);

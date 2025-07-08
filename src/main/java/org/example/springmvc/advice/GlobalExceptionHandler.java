@@ -1,6 +1,6 @@
 package org.example.springmvc.advice;
 
-import org.example.springmvc.VO.Result;
+import org.example.springmvc.vo.response.Result;
 import org.example.springmvc.exception.BusinessException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;

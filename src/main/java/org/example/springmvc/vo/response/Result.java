@@ -1,4 +1,4 @@
-package org.example.springmvc.VO;
+package org.example.springmvc.vo.response;
 
 import lombok.Data;
 

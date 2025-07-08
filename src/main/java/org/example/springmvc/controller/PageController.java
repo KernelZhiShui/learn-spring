@@ -22,9 +22,9 @@ public class PageController {
         model.addAttribute("age",12);
 
        List<User> users = Arrays.asList(
-                new User("小明",1,12),
-                new User("小王",2,13),
-                new User("小李",3,14)
+                new User("小明",1L,12),
+                new User("小王",2L,13),
+                new User("小李",3L,14)
         );
        model.addAttribute("users",users);
         return "page/success";
