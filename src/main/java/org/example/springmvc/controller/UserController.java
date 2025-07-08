@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+@CrossOrigin
 @RequestMapping("/api/v1")
 @RestController
 public class UserController {
@@ -19,6 +20,7 @@ public class UserController {
         try {
             User userResult = userService.getUserById(id);
             result = Result.success(userResult);
+            int x = 1/0;
         } catch (Exception e) {
             result = Result.error(e.getMessage());
         }
